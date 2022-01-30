@@ -10,6 +10,7 @@ export class UserModel extends Model{
     email: string | undefined
     phone: string | undefined
     ticket_id: number | undefined
+    password: string | undefined
 }
 
 export const userMapper = async ()=>{
@@ -40,6 +41,10 @@ export const userMapper = async ()=>{
             },
             ticket_id: {
                 type: DataTypes.INTEGER
+            },
+            password: { 
+                type: DataTypes.STRING(98), 
+                allowNull: false
             },
         },
         {

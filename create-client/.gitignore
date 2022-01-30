@@ -1,5 +1,6 @@
 node_modules
 jspm_packages
+.configs
 .build
 .env
 .dist

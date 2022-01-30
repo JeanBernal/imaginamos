@@ -23,3 +23,10 @@ functions:
       - http:
           path: /client
           method: post
+  signin:
+    handler: src/main/handler/HandlerSignin.signin
+
+    events:
+      - http:
+          path: /signin
+          method: post        

@@ -1,14 +1,14 @@
 import { Sequelize } from 'sequelize'
-import db from '../../../db'
+import configs from '../../../configs'
 
 
 
 class Database {
-    private dataBase: string = db.DB_NAME
-    private user: string = db.DB_USER
-    private pass: string = db.DB_PASS
-    private host: string = db.DB_HOST
-    private port: any = db.DB_PORT
+    private dataBase: string = configs.DB_NAME
+    private user: string = configs.DB_USER
+    private pass: string = configs.DB_PASS
+    private host: string = configs.DB_HOST
+    private port: any = configs.DB_PORT
 
     
     public database = async () =>{

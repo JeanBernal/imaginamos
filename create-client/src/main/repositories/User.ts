@@ -1,4 +1,4 @@
-import { userMapper } from "../models/User";
+import { userMapper, UserModel } from "../models/User";
 
 export class User{
     
@@ -12,7 +12,8 @@ export class User{
             'last_name' : user.lastName,
             'email': user.email,
             'phone': user.phone,
-            'ticket_id': null  
+            'ticket_id': null,
+            'password': user.password
         })
         return create    
     }
@@ -32,5 +33,11 @@ export class User{
             where: {id: id}
         })
         return update    
+    }
+
+    public async findUser(email: any) {
+        const mapper = await userMapper();
+        const user = await mapper.findOne({where: {email: email}})
+        return user
     }
 }
