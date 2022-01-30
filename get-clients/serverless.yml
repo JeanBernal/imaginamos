@@ -1,0 +1,25 @@
+service: get-clients
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+
+package:
+  include:
+    handler.ts
+
+functions:
+  getClients:
+    handler: src/main/handler/Handler.getClients
+
+    events:
+      - http:
+          path: /client
+          method: get
