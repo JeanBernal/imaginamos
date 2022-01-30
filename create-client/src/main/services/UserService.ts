@@ -36,7 +36,6 @@ export class UserService {
             console.log(newUser)
             let userCreated: Object = await newUser.create(user)
             let token = this.generateToken(userCreated)
-            console.log(' ++++++++++++++++++++++++ ', event)
             response.setResponse({userCreated, token}, true, RESPONSE_TYPES.SUCCESS)
             
         } catch (error) {
@@ -51,7 +50,6 @@ export class UserService {
               body: any = JSON.parse(event.body)
 
         try {
-            console.log(' ++++++++++++++++++++++++ ', event)
             const newUser = new User()
             const user = await newUser.findUser(body.email)
             if(!user){
@@ -59,12 +57,11 @@ export class UserService {
                 return response
             }
             let validated = await this.validatepassword(body.password, user.password)
-            console.log('-------- VALIDATE', validated)
             if(!validated){
-                response.setResponse({}, false, 'Invalid Password')
+                response.setResponse({}, false, RESPONSE_TYPES.INVALID_PASSWORD)
             }else{
                 let token = this.generateToken(user)
-                response.setResponse({user, token}, true, 'Logged')
+                response.setResponse({user, token}, true, RESPONSE_TYPES.SUCCESS)
             }
 
         } catch (error) {
@@ -89,7 +86,6 @@ export class UserService {
 
     private async validatepassword(password: string, passDatabase: any): Promise<boolean>{
         let compare = await bcrypt.compare(password, passDatabase)
-        console.log('----------------- COMPARE',compare)
         return compare
     }
 

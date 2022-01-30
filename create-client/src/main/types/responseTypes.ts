@@ -15,3 +15,5 @@ export const ERROR_VALIDATION = 'Error validation!';
 export const TASK_DONE_SUCCESFULLY = 'Task done successfully!';
 
 export const FIELD_REQUIRED = 'the {0} field is required';
+
+export const INVALID_PASSWORD = 'Invalid Password'
