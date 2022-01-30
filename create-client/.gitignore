@@ -1,6 +1,6 @@
 node_modules
 jspm_packages
-configs.ts
+configs
 .build
 .env
 .dist
