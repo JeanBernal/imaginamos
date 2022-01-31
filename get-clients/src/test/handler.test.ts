@@ -1,45 +1,24 @@
-import { handler } from "../../handler";
+import { getClients } from '../main/handler/Handler'
 import * as RESPONSE_TYPES from '../main/types/responseTypes';
-import { MocketResponse } from "./mocks/mockStructures";
 
-jest.mock('../main/services/resellerQueries/getResellers', () => ({
-    getResellers: jest.fn()
-    .mockImplementation(()=>{
-        return MocketResponse.RESELLERS
-    })
-}));
+const user = {
+    id: '999',
+    name: 'unit test',
+    last_name: 'sequelize',
+    email: 'unit_test@mail.com',
+    phone: '55555',
+    ticket_id: 1,
+    password: 'ima2022*'
 
-jest.mock('../main/services/resellerQueries/getResellerCatalogs', () => ({
-    getResellerCatalogs: jest.fn()
-    .mockImplementation(()=>{
-        return MocketResponse.RESELLER_CATALOGS
-    })
-}));
+}
 
-jest.mock('../main/services/resellerQueries/getResellerServices', () => ({
-    getResellerServices: jest.fn()
-    .mockImplementation(()=>{
-        return MocketResponse.RESELLER_SERVICES
-    })
-}));
 
-jest.mock('../main/services/resellerQueries/getResellerProducts', () => ({
-    getResellerProducts: jest.fn()
-    .mockImplementation(()=>{
-        return MocketResponse.RESELLER_PRODUCTS
-    })
-}));
-
-jest.mock('../main/services/resellerList', () => ({
-    listReseller: jest.fn()
-    .mockImplementation(()=>{
-        return MocketResponse.LIST_RESELLER
-    })
-}));
-
-describe('Testing handler', ()=>{
+describe('Handler', ()=>{
     test('Succes', async()=>{
-        let response = await handler()
+        let event = {"body": JSON.stringify(user),
+                     "headers" : "token"
+                    };
+        let response = await getClients(event)
         expect(response.statusCode).toEqual(RESPONSE_TYPES.OK)
     })
 })
