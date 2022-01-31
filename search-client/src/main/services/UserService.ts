@@ -1,6 +1,7 @@
 import { Response } from "../models/Response"
 import * as RESPONSE_TYPES from '../types/responseTypes'
 import { User } from "../repositories/User"
+import { Token } from "../traits/Token"
 
 export class UserService {
     
@@ -8,8 +9,18 @@ export class UserService {
 
         
         const response: Response = new Response(),
-              { id } = event.pathParameters
+              { id } = event.pathParameters,
+              {token} = event.headers
         try {
+            if(!token) {
+                response.setResponse({}, false, RESPONSE_TYPES.UNAUTHORIZED_MESSAGE)    
+                return response
+            }    
+            let verify = Token.verifyToken(token)
+            if(!verify){
+                response.setResponse({}, false, RESPONSE_TYPES.UNAUTHORIZED_MESSAGE)    
+                return response
+            }
             let newUser: User = new User()
             console.log(newUser)
             let user = await newUser.search(id)

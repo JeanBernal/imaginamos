@@ -12,7 +12,8 @@ export class User{
             'last_name' : user.lastName,
             'email': user.email,
             'phone': user.phone,
-            'ticket_id': null       
+            'ticket_id': null,
+            'password': user.password    
         },{
             where: {id: id}
         })

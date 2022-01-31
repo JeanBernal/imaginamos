@@ -13,5 +13,6 @@ export const NOT_FOUND_MESSAGE= 'Not Found';
 export const ERROR_MESSAGE = 'Unexpected error!';
 export const ERROR_VALIDATION = 'Error validation!';
 export const TASK_DONE_SUCCESFULLY = 'Task done successfully!';
+export const UNAUTHORIZED_MESSAGE = 'Unauthorized';
 
 export const FIELD_REQUIRED = 'the {0} field is required';

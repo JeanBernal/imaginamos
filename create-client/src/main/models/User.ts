@@ -1,7 +1,5 @@
 import { Model, DataTypes } from "sequelize";
-//import { Ticket } from "./Ticket";
 import database from "../config/PostgresConfig";
-//import { ticketMapper } from "./Ticket";
 
 export class UserModel extends Model{
     id: number | undefined
@@ -54,10 +52,5 @@ export const userMapper = async ()=>{
         }
     )
     return mapper
-    //Reseller.hasMany(ResellerCatalog, { foreignKey: 'id', as: 'catalogs'})
 }
-//Reseller.ResellerCatalog = resellerCatalogMapper
-//Reseller.hasMany(ResellerCatalog, { sourceKey: 'id', foreignKey: 're_seller_id', as: 'catalogs'})
-//Reseller.hasMany(ResellerService, { sourceKey: 'id', foreignKey: 're_seller_id', as: 'services'})
-//Reseller.hasMany(ResellerProduct, { sourceKey: 'id', foreignKey: 're_seller_id', as: 'products'})
 

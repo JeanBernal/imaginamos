@@ -6,6 +6,14 @@ provider:
   name: aws
   runtime: nodejs12.x
   lambdaHashingVersion: 20201221
+  region: sa-east-1
+  vpc:
+    securityGroupIds:
+      - sg-0040501d541faf6e1 
+    subnetIds:
+      - subnet-014defe50c3209b86
+      - subnet-036542cdfc3f4739c
+      - subnet-0f5ff6e485b03d67a
 
 plugins:
   - serverless-plugin-typescript
@@ -29,4 +37,22 @@ functions:
     events:
       - http:
           path: /signin
-          method: post        
+          method: post
+
+resources:
+  Resources:
+    AWSLambdaVPCAccessExecutionRole:
+      Type: AWS::IAM::ManagedPolicy
+      Properties:
+        Description: Creating policy for vpc connetion.
+        Roles:
+          - {"Ref" : "IamRoleLambdaExecution"}
+        PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+            - Effect: Allow
+              Action:
+                - ec2:CreateNetworkInterface
+                - ec2:DescribeNetworkInterfaces
+                - ec2:DeleteNetworkInterface
+              Resource: "*"

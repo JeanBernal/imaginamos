@@ -29,6 +29,7 @@
   "devDependencies": {
     "@types/aws-lambda": "^8.10.83",
     "@types/jest": "^27.0.2",
+    "@types/jsonwebtoken": "^8.5.8",
     "@types/node": "^16.9.6",
     "@types/uuid": "^8.3.4",
     "@types/validator": "^13.7.1",
@@ -44,6 +45,7 @@
   },
   "dependencies": {
     "dotenv": "^10.0.0",
+    "jsonwebtoken": "^8.5.1",
     "pg": "^8.7.1",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.6.5",

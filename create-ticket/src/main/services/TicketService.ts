@@ -4,6 +4,7 @@ import * as RESPONSE_TYPES from '../types/responseTypes'
 import { Ticket } from "../repositories/Ticket"
 import { TicketAssignment } from "../traits/TicketAssignmente"
 import { v4 as uuidv4 } from 'uuid'
+import { Token } from "../traits/Token"
 
 export class TicketService {
     
@@ -11,13 +12,22 @@ export class TicketService {
 
         const request = new Request(),
               response: Response = new Response(),
-              body: any = JSON.parse(event.body)
+              body: any = JSON.parse(event.body),
+              {token} = event.headers
         let validate: Array<string>,
             newTicketAssignment: TicketAssignment,
             technical: number,
-            token: any
+            tokenTicket: any
         try {
-
+            if(!token) {
+                response.setResponse({}, false, RESPONSE_TYPES.UNAUTHORIZED_MESSAGE)    
+                return response
+            }    
+            let verify = Token.verifyToken(token)
+            if(!verify){
+                response.setResponse({}, false, RESPONSE_TYPES.UNAUTHORIZED_MESSAGE)    
+                return response
+            }
             validate = request.validateRequest(body)
             console.log(validate)
             if(validate.length > 0){
@@ -26,9 +36,9 @@ export class TicketService {
             }
             newTicketAssignment = new TicketAssignment()
             technical = await newTicketAssignment.assign()
-            token = uuidv4()
+            tokenTicket = uuidv4()
             const ticket = {
-                token: token,
+                token: tokenTicket,
                 description: body.description,
                 technicalId: technical        
             }
